@@ -311,10 +311,11 @@ class Detector:
         else:
             import torch
             with torch.inference_mode():
+                # todo: FP16问题 verbose=False, half=True
                 results = self._model(
                     frame_inp, conf=CONFIDENCE_THRESHOLD,
                     classes=DETECT_CLASSES, imgsz=INFERENCE_IMGSZ,
-                    verbose=False, half=True,
+                    verbose=False, half=False,
                 )
             boxes_scores = []
             for result in results:

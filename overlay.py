@@ -28,6 +28,7 @@ _TRANSPARENT_COLOR = "#010101"
 
 class Overlay:
     def __init__(self):
+        ctypes.windll.shcore.SetProcessDpiAwareness(1)  # 无缩放
         self._root = tk.Tk()
         self._setup_window()
         self._canvas = tk.Canvas(
@@ -37,7 +38,14 @@ class Overlay:
         )
         self._canvas.pack(fill=tk.BOTH, expand=True)
         self._make_click_through()
-        self._exclude_from_capture()
+        # todo: 排除窗口区域使用mss黑屏问题
+        try:
+            import dxcam
+            cam = dxcam.create(output_color="RGB")
+            self._exclude_from_capture()
+        except:
+            print("dxcam 失败")
+            pass
         self._root.update_idletasks()
         self._sw = self._root.winfo_screenwidth()
         self._sh = self._root.winfo_screenheight()

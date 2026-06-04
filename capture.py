@@ -84,6 +84,9 @@ class ScreenCapturer:
             monitor = {"left": l, "top": t, "width": r - l, "height": b - t}
         sct = self._mss_sct.grab(monitor)
         img = Image.frombytes("RGB", sct.size, sct.bgra, "raw", "BGRX")
+        # todo: 排除窗口区域使用mss黑屏问题
+        # img.save("screenshot.png")
+        # time.sleep(0.1)
         return np.array(img)
 
     @property

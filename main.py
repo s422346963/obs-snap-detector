@@ -98,7 +98,7 @@ def _capture_loop(capturer: ScreenCapturer):
 def _inference_loop(detector: Detector):
     while _running:
         try:
-            frame = _frame_queue.get(timeout=0.1)
+            frame = _frame_queue.get(timeout=0.2)
             # 排空积压旧帧，始终推理最新帧（消除视角转动时的滞后感）
             while True:
                 try:
@@ -107,7 +107,11 @@ def _inference_loop(detector: Detector):
                     break
         except queue.Empty:
             continue
+        # todo 耗时
+        t0 = time.perf_counter()
         detections = detector.detect(frame)
+        t1 = time.perf_counter()
+        print(f"[Inference] 推理耗时: {t1 - t0:.4f} s")
         if _detection_queue.full():
             try: _detection_queue.get_nowait()
             except queue.Empty: pass

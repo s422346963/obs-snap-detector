@@ -74,7 +74,7 @@ LABEL_FONT_SIZE  = 11
 FPS_FONT_SIZE    = 13
 
 # ── 性能 ──────────────────────────────────────────────
-TARGET_FPS           = 60      # GPU 推理支持 60fps 捕获
+TARGET_FPS           = 24      # GPU 推理支持 24fps 捕获
 INFERENCE_QUEUE_SIZE = 2
 DETECTION_QUEUE_SIZE = 2
 
