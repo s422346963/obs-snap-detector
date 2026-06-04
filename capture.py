@@ -69,7 +69,10 @@ class ScreenCapturer:
     def grab_frame(self) -> "np.ndarray | None":
         """返回最新一帧 RGB numpy array (H, W, 3)，无新帧则返回 None。"""
         if self._backend == "dxcam":
-            return self._camera.get_latest_frame()
+            frame = self._camera.get_latest_frame()
+            # from PIL import Image
+            # Image.fromarray(frame).save("debug_raw.png")
+            return frame
         elif self._backend == "mss":
             return self._grab_mss()
         return None

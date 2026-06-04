@@ -38,14 +38,9 @@ class Overlay:
         )
         self._canvas.pack(fill=tk.BOTH, expand=True)
         self._make_click_through()
-        # todo: 排除窗口区域使用mss黑屏问题
-        try:
-            import dxcam
-            cam = dxcam.create(output_color="RGB")
-            self._exclude_from_capture()
-        except:
-            print("dxcam 失败")
-            pass
+        # todo: 排除窗口区域黑屏问题
+        #self._exclude_from_capture()
+
         self._root.update_idletasks()
         self._sw = self._root.winfo_screenwidth()
         self._sh = self._root.winfo_screenheight()

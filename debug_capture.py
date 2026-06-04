@@ -12,6 +12,9 @@ time.sleep(3)
 # ── 截帧 ──────────────────────────────────────────────
 try:
     import dxcam
+    # DDA 桌面复制 API 不能在 N 卡 / A 卡独显上运行，只能用核显 Intel UHD/HD 显卡捕获
+    # NVIDIA 控制面板 → 管理 3D 设置→程序设置→添加 python.exe→首选图形处理器：集成 GPU
+    print(dxcam.device_info())
     cam = dxcam.create(output_color="RGB")
     cam.start(video_mode=True, target_fps=30)
     time.sleep(0.5)
